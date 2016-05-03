@@ -4,6 +4,8 @@
     <meta charset="utf-8">
     <title>Dojo Survey</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/materialize.css') }}" type="text/css" rel="stylesheet" media="screen,projection"/>
   </head>
   <body>
     <div class="wrapper">
@@ -12,8 +14,11 @@
         <p><label for="language">Favorite Language:</label><input type="text" name="language"></p>
         <p><label for="location">Dojo Location:</label><input type="text" name="location"></p>
         <p><label for="comment">Comment</label><textarea name="comment"></textarea></p>
-        <p><input type="submit" value="Button "></p>
+        <p><input class='btn' type="submit" value="Submit "></p>
       </form>
     </div>
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="{{ url_for('static', filename='js/materialize.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/materialize.js') }}"></script>
   </body>
 </html>
