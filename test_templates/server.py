@@ -3,4 +3,7 @@ app = Flask(__name__)
 @app.route('/')
 def index():
     return render_template("index.html", phrase="Hello", times=5)
+@app.route('/show')
+def show_user():
+    return render_template('user.html', name='Jay', email='kpatel@kodingdojo.com')
 app.run(debug=True)
