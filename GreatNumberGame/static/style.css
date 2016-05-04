@@ -1,0 +1,22 @@
+body{
+  padding: 20px;
+}
+
+.correct{
+  text-align: center;
+  color: white;
+  background-color: green;
+  width: 200px;
+  height: 100px;
+  padding: 20px;
+  border: 1px solid black;
+}
+.toohigh, .toolow{
+  text-align: center;
+  color: white;
+  background-color: red;
+  width: 200px;
+  height: 100px;
+  padding: 20px;
+  border: 1px solid black;
+}
