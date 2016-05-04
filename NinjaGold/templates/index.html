@@ -1,0 +1,66 @@
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+ 	<meta charset="UTF-8">
+ 	<meta name="author" content="Jonathan Ben-Ammi">
+ 	<title>Ninja Gold </title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+ </head>
+ <body>
+ 	<div class="container">
+ 		<div id="header">
+	 		<label>Your Gold:</label>
+	 		<div class="score">{{session['score']}}</div>
+      <a href="/reset"><button>Reset</button></a>
+ 		</div>
+ 		<div id="gameBody">
+ 			<div class="earnGold">
+ 				<H3>Farm</H3>
+ 				<p>(earns 10 to 20 golds)</p>
+ 				<form action="/process_money" method="post">
+          <input type="hidden" name="building" value="farm">
+	 				<input type="submit" value="Find Gold!" />
+ 				</form>
+ 			</div>
+ 			<div class="earnGold">
+ 				<H3>Cave</H3>
+ 				<p>(earns 5 to 10 golds)</p>
+        <form action="/process_money" method="post">
+          <input type="hidden" name="building" value="cave">
+	 				<input type="submit" value="Find Gold!" />
+ 				</form>
+ 			</div>
+ 			<div class="earnGold">
+ 				<H3>House</H3>
+ 				<p>(earns 2 to 5 golds)</p>
+        <form action="/process_money" method="post">
+          <input type="hidden" name="building" value="house">
+	 				<input type="submit" value="Find Gold!" />
+ 				</form>
+ 			</div>
+ 			<div class="earnGold">
+ 				<H3>Casino</H3>
+ 				<p>(Win or Lose 0 to 50 golds)</p>
+        <form action="/process_money" method="post">
+          <input type="hidden" name="building" value="casino">
+	 				<input type="submit" value="Find Gold!" />
+ 				</form>
+ 			</div>
+ 		</div>
+ 		<div id="gameText" style="border: 1px solid black">
+      {% for action in session['actions']: %}
+        {% if "Earned" in action:%}
+          <p class = 'earned'>
+          	{{ action }}
+          </p>
+        {% endif%}
+        {% if "Lost" in action:%}
+          <p class = 'lost'>
+            {{ action }}
+          </p>
+        {% endif%}
+      {% endfor %}
+ 		</div>
+ 	</div>
+ </body>
+ </html>
