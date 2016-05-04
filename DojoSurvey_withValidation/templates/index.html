@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Dojo Survey</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/materialize.css') }}" type="text/css" rel="stylesheet" media="screen,projection"/>
+  </head>
+  <body>
+    <div class="wrapper">
+      <form action="/result" method="post">
+        <p><label for="name">Your Name:</label><span class="name_error">{{session['name_error']}}</span><input type="text" name="name"></p>
+        <p><label for="language">Favorite Language:</label><input type="text" name="language"></p>
+        <p><label for="location">Dojo Location:</label><input type="text" name="location"></p>
+        <p><label for="comment">Comment</label><span class="name_error">{{session['comment_error']}}</span><textarea name="comment"></textarea></p>
+        <p><input class='btn' type="submit" value="Submit "></p>
+      </form>
+    </div>
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="{{ url_for('static', filename='js/materialize.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/materialize.js') }}"></script>
+  </body>
+</html>
