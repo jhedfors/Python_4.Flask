@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>{{ninja}}</title>
+  </head>
+  <link href="{{ url_for('static', filename='css/style.css') }}" type="text/css" rel="stylesheet"/>
+  <body>
+    {% if ninja == 'none'%}
+      <div class="none">
+        <h3></h3>
+        <img src="/static/images/notapril.jpg" alt="April" />
+      </div>
+    {% endif %}
+    {% if ninja == 'all'%}
+      <div class="none">
+        <h3></h3>
+        <img src="/static/images/leonardo.jpg" alt="April" />
+        <img src="/static/images/michelangelo.jpg" alt="April" />
+        <img src="/static/images/raphael.jpg" alt="April" />
+        <img src="/static/images/donatello.jpg" alt="April" />
+
+      </div>
+    {% endif %}
+    {% if ninja == 'blue'%}
+      <div class="none">
+        <h3></h3>
+        <img src="/static/images/leonardo.jpg" alt="April" />
+      </div>
+    {% endif %}
+    {% if ninja == 'orange'%}
+      <div class="none">
+        <h3></h3>
+        <img src="/static/images/michelangelo.jpg" alt="April" />
+      </div>
+    {% endif %}
+    {% if ninja == 'red'%}
+      <div class="none">
+        <h3></h3>
+        <img src="/static/images/raphael.jpg" alt="April" />
+      </div>
+    {% endif %}
+    {% if ninja == 'purple'%}
+      <div class="none">
+        <h3></h3>
+        <img src="/static/images/donatello.jpg" alt="April" />
+      </div>
+    {% endif %}
+  </body>
+</html>
