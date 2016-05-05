@@ -40,7 +40,7 @@
                   {% endif %}
                 {% endwith %}
                 </span>
-              <input type="email" name="email"></p>
+              <input type="text" name="email"></p>
             <p><label for="password">Password:</label><span class="error">
               {% with errors = get_flashed_messages(category_filter=["password_error"]) %}
                 {% if errors %}
@@ -49,7 +49,7 @@
                   {% endfor%}
                 {% endif %}
               {% endwith %}
-            </span><input type="text" name="password"></p>
+            </span><input type="password" name="password"></p>
             <p><label for="password_conf">Confirm Password:</label><span class="error">
               {% with errors = get_flashed_messages(category_filter=["password_conf_error"]) %}
                 {% if errors %}
@@ -58,7 +58,7 @@
                   {% endfor%}
                 {% endif %}
               {% endwith %}
-              </span><input type="text" name="password_conf"></p>
+            </span><input type="password" name="password_conf"></p>
             <p><input class='btn' type="submit" value="Submit "></p>
           </form>
 
