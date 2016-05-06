@@ -1,10 +1,12 @@
 from flask import Flask, render_template, request, redirect, session,flash
+from mysqlconnection import MySQLConnector
 import re
 EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9\.\+_-]+@[a-zA-Z0-9\._-]+\.[a-zA-Z]*$')
 NAME_REGEX = re.compile(r'^[A-z]+$')
 PASSWORD_REGEX = re.compile(r'^(?=.*[A-Z])(?=.*\d)(.{8,})$')
 app = Flask(__name__)
 app.secret_key = 'secretisnone'
+mysql = MySQLConnector(app,'mydb')
 @app.route('/')
 def index():
     return render_template("index.html")
@@ -43,5 +45,16 @@ def registration_form():
         errors = 1
     if errors > 0:
         return redirect('/')
-    return render_template("result.html")
+    else:
+        add()
+        return render_template("result.html")
+def add():
+    print request.form
+    query = "INSERT INTO users (first_name, last_name, email, password, created_at, updated_at) VALUES (:first_name, :last_name, :email, :password, NOW(), NOW())"
+    data = {'first_name' : request.form['fname'],'last_name' : request.form['lname'],'email' : request.form['email'],'password' : request.form['password']}
+    print query
+    print data
+    mysql.query_db(query,data)
+    return redirect("/")
+
 app.run(debug=True)
