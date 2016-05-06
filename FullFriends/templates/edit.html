@@ -1,0 +1,17 @@
+<html>
+<head>
+  <title>Friends</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+  <h2>Edit</h2>
+  <form action='/friends/{{ one_friend['id'] }}' method='POST'>
+    <label for="first_name">First Name:<input type="text" name="first_name" id="first_name" value="{{ one_friend['first_name'] }}"></label>
+    <label for="last_name">Last Name:<input type="text" name="last_name" id="last_name" value="{{ one_friend['last_name'] }}"></label>
+    <label for="occupation">Occupation:<input type="text" name="occupation" id="occupation" value="{{ one_friend['occupation'] }}"></label>
+    <input type="submit" value="Edit">
+  </form>
+  <a href="/"><button>Go Back</button></a>
+</body>
+</html>
