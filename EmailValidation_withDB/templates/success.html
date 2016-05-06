@@ -7,7 +7,16 @@
   </head>
   <body>
     <div class="wrapper">
-
+      <div class="success">
+        <p>
+          The email address you entered {{ session['email'] }} is a VALID email address! Thank you!
+        </p>
+      </div>
+      <h4>Email Addresses Entered:</h4>
+      {% for user in all_users %}
+          <p><span>{{user['email']}}</span><span>{{user['created_at']}}</span><span><a href="/delete/{{user['id']}}">Delete</a></span></p>
+      {% endfor %}
+      <a href="/"><button>Go Back</button></a>
     </div>
   </body>
 </html>

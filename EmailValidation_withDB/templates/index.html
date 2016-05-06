@@ -8,7 +8,17 @@
   </head>
   <body>
     <div class="wrapper">
-      <form action="/result" method="post">
+      {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          <div class="error">
+            {% for message in messages %}
+              <p>{{message}}</p>
+            {% endfor %}
+          </div>
+        {% endif %}
+      {% endwith %}
+
+      <form action="/process" method="post">
         <p><label for="name">Email:</label><input type="text" name="email"></p>
         <p><input class='btn' type="submit" value="Submit "></p>
       </form>
