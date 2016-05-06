@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Email Validation</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  </head>
+  <body>
+    <div class="wrapper">
+      <form action="/result" method="post">
+        <p><label for="name">Email:</label><input type="text" name="email"></p>
+        <p><input class='btn' type="submit" value="Submit "></p>
+      </form>
+    </div>
+  </body>
+</html>

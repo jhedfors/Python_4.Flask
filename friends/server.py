@@ -9,6 +9,7 @@ def index():
     return render_template('index.html', all_friends=friends) # pass the data to our template
 @app.route('/friends', methods=['POST'])
 def create():
+    print request.form['first_name']
     # write our query as a string, notice how we have multiple values we want to
     # insert into our query
     query = "INSERT INTO friends (first_name, last_name, occupation, created_at, updated_at) VALUES (:firstname, :lastname, :occupation, NOW(), NOW())"
