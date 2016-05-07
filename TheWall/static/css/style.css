@@ -4,9 +4,10 @@
 }
 .wrapper {
   /*width: 400px;*/
-  margin: 50px;
-  padding: 20px;
+  /*margin: 50px;*/
+  /*padding: 20px;*/
 }
+
 label{
   display: inline-block;
   width:150px;
@@ -14,4 +15,8 @@ label{
 }
 .error{
   color: red;
+}
+
+input.btn{
+  background-color:'#8e24aa';
 }

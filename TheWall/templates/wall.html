@@ -6,9 +6,19 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="{{ url_for('static', filename='css/materialize.css') }}" type="text/css" rel="stylesheet" media="screen,projection"/>
+
   </head>
   <body>
     <div class="wrapper">
+      <nav class="indigo darken-4" role="navigation">
+        <div class="nav-wrapper container">
+          <ul class="right">
+            <li>Welcome {{session['active_name']}}</li>
+            <li><a href="/logoff">Logoff</a></li>
+          </ul>
+          <p class="brand-logo left">The Wall</p>
+        </div>
+      </nav>
       <div class="row">
         <div class="col s12">
           <div class="card blue-grey darken-1">
@@ -26,8 +36,12 @@
       </div>
 
     </div>
-    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-    <script src="{{ url_for('static', filename='js/materialize.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/materialize.js') }}"></script>
+
+    <!-- Obtain latest version of jquery from CDN -->
+      <script src="http://code.jquery.com/jquery-latest.js"></script>
+      <!-- jQuery must be imported before materialize -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.96.1/js/materialize.min.js"></script>
+    </body>
+    <script src="{{ url_for('static', filename='js/init.js') }}"></script>
   </body>
 </html>

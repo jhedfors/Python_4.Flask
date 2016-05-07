@@ -32,13 +32,14 @@ def login_form():
         if(db):
             if(match):
                 session['active_id'] = db[0]['id']
+                session['active_name'] = db[0]['first_name']
                 return redirect('/wall')
             return redirect('/')
         else:
             flash(u'Email/password not valid!','login_password_error')
             return redirect('/')
 def login():
-    query = "SELECT id, password FROM users WHERE email = :email"
+    query = "SELECT id, password, first_name FROM users WHERE email = :email"
     data = {'email' : request.form['email']}
     return mysql.query_db(query,data)
 @app.route('/register', methods=['POST'])
@@ -92,9 +93,8 @@ def wall_page():
     return render_template("wall.html")
 def get_messages():
     active_id = session['active_id']
-    query = "SELECT messages.id AS message_id, first_name, last_name, message, messages.created_on, messages.users_id AS messages_users_id FROM messages LEFT JOIN users ON users.id = :id"
-    data = {'id' : active_id}
-    return mysql.query_db(query,data)
+    query = "SELECT messages.id AS message_id, first_name, last_name, message, messages.created_on, messages.users_id AS messages_users_id FROM messages LEFT JOIN users ON users.id = messages.users_id"
+    return mysql.query_db(query)
 def add_message(message,active_id):
     active_id = session['active_id']
     query = "INSERT INTO messages (message, created_on, modified_on, users_id) VALUES (:message, NOW(), NOW(), :active_id)"
@@ -102,6 +102,5 @@ def add_message(message,active_id):
 @app.route('/logoff')
 def logoff():
     session.clear()
-    return redirect
-    ('/')
+    return redirect('/')
 app.run(debug=True)
