@@ -32,7 +32,7 @@ def login_form():
         if(db):
             if(match):
                 session['active_id'] = db[0]['id']
-                return render_template("wall.html")
+                return redirect('/wall')
             return redirect('/')
         else:
             flash(u'Email/password not valid!','login_password_error')
@@ -79,14 +79,29 @@ def registration_form():
     if errors > 0:
         return redirect('/')
     add()
-    return render_template("wall.html")
+    return redirect('/wall')
 def add():
     pw_hash = bcrypt.generate_password_hash(request.form['password'])
     query = "INSERT INTO users (first_name, last_name, email, password, created_on, modified_on) VALUES (:first_name, :last_name, :email, :password, NOW(), NOW())"
     data = {'first_name' : request.form['fname'],'last_name' : request.form['lname'],'email' : request.form['email'],'password' : pw_hash}
     mysql.query_db(query,data)
+@app.route('/wall')
+def wall_page():
+    messages = get_messages()
+    print messages
+    return render_template("wall.html")
+def get_messages():
+    active_id = session['active_id']
+    query = "SELECT messages.id AS message_id, first_name, last_name, message, messages.created_on, messages.users_id AS messages_users_id FROM messages LEFT JOIN users ON users.id = :id"
+    data = {'id' : active_id}
+    return mysql.query_db(query,data)
+def add_message(message,active_id):
+    active_id = session['active_id']
+    query = "INSERT INTO messages (message, created_on, modified_on, users_id) VALUES (:message, NOW(), NOW(), :active_id)"
+    data = {'message' : message,'active_id' : active_id}
 @app.route('/logoff')
 def logoff():
     session.clear()
-    return redirect('/')
+    return redirect
+    ('/')
 app.run(debug=True)
