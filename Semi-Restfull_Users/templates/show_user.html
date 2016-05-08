@@ -7,11 +7,11 @@
   </head>
   <body>
     <div class="wrapper">
-      <h1>User {{info['user_id']}}</h1>
-      <p>Full Name:</p>
-      <p>Email:</p>
-      <p>Created:</p>
-      <a href="/users/{{info['user_id']}}/edit">Edit</a> | <a href="/users/{{info['user_id']}}/destroy">Delete </a>
+      <h1>User {{info['id']}}</h1>
+      <p>Full Name: {{info['first_name']}} {{info['last_name']}}</p>
+      <p>Email: {{info['email']}}</p>
+      <p>Created: {{info['created_at']}}</p>
+      <a href="/users/{{info['id']}}/edit">Edit</a> | <a href="/users/{{info['id']}}/destroy">Delete </a>
     </div>
 
   </body>

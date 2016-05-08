@@ -7,18 +7,18 @@
   </head>
   <body>
     <div class="wrapper">
-      <h1>Edit User {{info['user_id']}}</h1>
-      <form class="" action="/users/create" method="post">
+      <h1>Edit User {{info['id']}}</h1>
+      <form class="" action="/users/{{info['id']}}" method="post">
         <p>First Name:</p>
-        <input type="text" name="first_name">
+        <input type="text" name="first_name" value="{{info['first_name']}}">
         <p>Last Name:</p>
-        <input type="text" name="last_name">
+        <input type="text" name="last_name" value="{{info['last_name']}}">
         <p>Email:</p>
-        <input type="email" name="email">
+        <input type="email" name="email" value="{{info['email']}}">
         <input type="submit" value="Update">
       </form>
 
-      <a href="/users/{{info['user_id']}}">Show</a> | <a href="/users">Go Back</a>
+      <a href="/users/{{info['id']}}">Show</a> | <a href="/users">Go Back</a>
     </div>
 
   </body>
