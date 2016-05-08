@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, redirect
 from mysqlconnection import MySQLConnector
+import datetime
 app = Flask(__name__)
 mysql = MySQLConnector(app,'semi-restful-users')
 @app.route('/')
@@ -32,7 +33,6 @@ def show_user_by_id(user_id):
     query = "SELECT * FROM users WHERE id = :user_id"
     values = {'user_id': user_id}
     return mysql.query_db(query,values)
-# @app.route('/users/<user_id>', methods = ['POST'])
 def update_user(user_id):
     query = "UPDATE users SET first_name = :first_name, last_name = :last_name, email = :email, modified_at = NOW() WHERE id = :id"
     values = {'first_name': request.form['first_name'],'last_name': request.form['last_name'],'email': request.form['email'],'id':user_id}
@@ -44,6 +44,8 @@ def edit_user(user_id):
     return render_template('edit_user.html', info = info)
 @app.route('/users/<user_id>/destroy')
 def destroy_user(user_id):
-    info = {'user_id' : user_id}
+    query = "DELETE FROM users WHERE id = :id"
+    values = {'id': user_id}
+    mysql.query_db(query,values)
     return redirect('/users')
 app.run(debug=True)

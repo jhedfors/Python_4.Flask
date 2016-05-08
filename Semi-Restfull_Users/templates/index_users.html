@@ -4,32 +4,48 @@
     <meta charset="utf-8">
     <title>Semi-Restfull Routes</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
   </head>
   <body>
     <div class="wrapper">
-      <h1>Users</h1>
-      <table>
-        <thead>
-          <th>id</th>
-          <th>Full Name</th>
-          <th>Email</th>
-          <th>Created At</th>
-          <th>Actions</th>
-        </thead>
-        <tbody>
-          {%for user in users%}
-          <tr>
-            <td>{{user['id']}}</td>
-            <td>{{user['first_name']}} {{user['last_name']}}</td>
-            <td>{{user['email']}}</td>
-            <td>{{user['created_at']}}</td>
-            <td><a href="/users/{{user['id']}}">Show</a> <a href="/users/{{user['id']}}/edit">Edit</a> <a href="/users/{{user['id']}}/destroy">Delete</a></td>
-          </tr>
-          {%endfor%}
-        </tbody>
-      </table>
-      <a href="/users/new">Add a new user</a>
+      <nav>
+        <div class="nav-wrapper">
+          <span class="brand-logo left">Users</span>
+          <ul class="nav-mobile right">
+            <li><a href="/users">Home</a></li>
+          </ul>
+        </div>
+      </nav>
+      <div class="container">
+        <table>
+          <thead>
+            <th>id</th>
+            <th>Full Name</th>
+            <th>Email</th>
+            <th>Created At</th>
+            <th>Actions</th>
+          </thead>
+          <tbody>
+            {%for user in users%}
+            <tr>
+              <td>{{user['id']}}</td>
+              <td>{{user['first_name']}} {{user['last_name']}}</td>
+              <td>{{user['email']}}</td>
+              <td>{{user['created_at'].strftime('%b %d %Y %I:%M %p')}}</td>
+              <td><a href="/users/{{user['id']}}">Show</a> <a href="/users/{{user['id']}}/edit">Edit</a> <a href="/users/{{user['id']}}/destroy">Delete</a></td>
+            </tr>
+            {%endfor%}
+          </tbody>
+        </table>
+        <a class="btn" href="/users/new">Add a new user</a>
+      </div>
     </div>
-
+    <!-- Obtain latest version of jquery from CDN -->
+      <script src="http://code.jquery.com/jquery-latest.js"></script>
+      <!-- jQuery must be imported before materialize -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.96.1/js/materialize.min.js"></script>
+    </body>
+    <script src="{{ url_for('static', filename='js/init.js') }}"></script>
   </body>
 </html>

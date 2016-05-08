@@ -4,15 +4,32 @@
     <meta charset="utf-8">
     <title>Show User - Semi-Restfull Routes</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
+
   </head>
   <body>
     <div class="wrapper">
-      <h1>User {{info['id']}}</h1>
-      <p>Full Name: {{info['first_name']}} {{info['last_name']}}</p>
-      <p>Email: {{info['email']}}</p>
-      <p>Created: {{info['created_at']}}</p>
-      <a href="/users/{{info['id']}}/edit">Edit</a> | <a href="/users/{{info['id']}}/destroy">Delete </a>
+      <nav>
+        <div class="nav-wrapper">
+          <span class="brand-logo left">User {{info['id']}}</span>
+          <ul class="nav-mobile right">
+            <li><a href="/users">Home</a></li>
+          </ul>
+        </div>
+      </nav>
+      <div class="container">
+        <p>Full Name: {{info['first_name']}} {{info['last_name']}}</p>
+        <p>Email: {{info['email']}}</p>
+        <p>Created: {{info['created_at'].strftime('%b %d %Y %I:%M %p')}}</p>
+        <a class="btn" href="/users/{{info['id']}}/edit">Edit</a>  <a class="btn" href="/users/{{info['id']}}/destroy">Delete </a>
+      </div>
     </div>
-
+    <!-- Obtain latest version of jquery from CDN -->
+      <script src="http://code.jquery.com/jquery-latest.js"></script>
+      <!-- jQuery must be imported before materialize -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.96.1/js/materialize.min.js"></script>
+    </body>
+    <script src="{{ url_for('static', filename='js/init.js') }}"></script>
   </body>
 </html>
