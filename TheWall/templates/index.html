@@ -9,7 +9,7 @@
   </head>
   <body>
     <div class="wrapper">
-      <nav class="indigo darken-4" role="navigation">
+      <nav class="teal darken-4" role="navigation">
         <div class="nav-wrapper container">
           <ul class="right">
 
@@ -21,7 +21,7 @@
         <div class="row">
           <div class="col s6 right-align">
             <form  class="section" action="/register" method="post">
-              <p><label for="fname">First Name:</label><span class="error">
+              <p><label for="fname">First Name:</label><br><span class="error">
                 {% with errors = get_flashed_messages(category_filter=["fname_error"]) %}
                 {% if errors %}
                 {% for error in errors%}
@@ -30,7 +30,7 @@
                 {% endif %}
                 {% endwith %}
               </span><input type="text" name="fname"></p>
-              <p><label for="lname">Last Name:</label><span class="error">
+              <p><label for="lname">Last Name:</label><br><span class="error">
                 {% with errors = get_flashed_messages(category_filter=["lname_error"]) %}
                 {% if errors %}
                 {% for error in errors%}
@@ -39,7 +39,7 @@
                 {% endif %}
                 {% endwith %}
               </span><input type="text" name="lname"></p>
-              <p><label for="email">Email:</label>
+              <p><label for="email">Email:</label><br>
                 <span class="error">
                   {% with errors = get_flashed_messages(category_filter=["email_error"]) %}
                   {% if errors %}
@@ -50,7 +50,7 @@
                   {% endwith %}
                 </span>
                 <input type="text" name="email"></p>
-                <p><label for="password">Password:</label><span class="error">
+                <p><label for="password">Password:</label><br><span class="error">
                   {% with errors = get_flashed_messages(category_filter=["password_error"]) %}
                   {% if errors %}
                   {% for error in errors%}
@@ -59,7 +59,7 @@
                   {% endif %}
                   {% endwith %}
                 </span><input type="password" name="password"></p>
-                <p><label for="password_conf">Confirm Password:</label><span class="error">
+                <p><label for="password_conf">Confirm Password:</label><br><span class="error">
                   {% with errors = get_flashed_messages(category_filter=["password_conf_error"]) %}
                   {% if errors %}
                   {% for error in errors%}
@@ -68,14 +68,14 @@
                   {% endif %}
                   {% endwith %}
                 </span><input type="password" name="password_conf"></p>
-                <p><input class='btn' type="submit" value="Register "></p>
+                <p><input class='btn teal accent-4' type="submit" value="Register "></p>
               </form>
             </div>
 
           <div class="col s6">
             <form class="section" action="/login" method="post">
               <p><label for="email">Email:</label>
-                <span class="error">
+                <br><span class="error">
                   {% with errors = get_flashed_messages(category_filter=["login_email_error"]) %}
                     {% if errors %}
                       {% for error in errors%}
@@ -85,7 +85,7 @@
                   {% endwith %}
                   </span>
                 <input type="text" name="email"></p>
-              <p><label for="password">Password:</label><span class="error">
+              <p><label for="password">Password:</label><br><span class="error">
                 {% with errors = get_flashed_messages(category_filter=["login_password_error"]) %}
                   {% if errors %}
                     {% for error in errors%}
