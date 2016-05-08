@@ -2,12 +2,12 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Create User - Semi-Restfull Routes</title>
+    <title>Update User - Semi-Restfull Routes</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
   </head>
   <body>
     <div class="wrapper">
-      <h1>Add a new user</h1>
+      <h1>Edit User {{info['user_id']}}</h1>
       <form class="" action="/users/create" method="post">
         <p>First Name:</p>
         <input type="text" name="first_name">
@@ -15,10 +15,10 @@
         <input type="text" name="last_name">
         <p>Email:</p>
         <input type="email" name="email">
-        <input type="submit" value="Create">
+        <input type="submit" value="Update">
       </form>
 
-      <a href="/users">Go Back</a>
+      <a href="/users/{{info['user_id']}}">Show</a> | <a href="/users">Go Back</a>
     </div>
 
   </body>
