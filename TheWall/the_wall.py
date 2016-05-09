@@ -12,9 +12,6 @@ app.secret_key = 'secretisnone'
 mysql = MySQLConnector(app,'the_wall')
 @app.route('/')
 def index():
-    # print datetime.datetime.now()
-    # print datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-
     return render_template("index.html")
 @app.route('/login', methods=['POST'])
 def login_form():
@@ -31,18 +28,16 @@ def login_form():
     if errors > 0:
         return redirect('/')
     else:
-        db = login()
-        match = bcrypt.check_password_hash(db[0]['password'], request.form['password'])
+        db = show_by_email()
         if(db):
+            match = bcrypt.check_password_hash(db[0]['password'], request.form['password'])
             if(match):
                 session['active_id'] = db[0]['id']
                 session['active_name'] = db[0]['first_name']
                 return redirect('/wall')
-            return redirect('/')
-        else:
-            flash(u'Email/password not valid!','login_password_error')
-            return redirect('/')
-def login():
+        flash(u'Email/password not valid!','login_password_error')
+        return redirect('/')
+def show_by_email():
     query = "SELECT id, password, first_name FROM users WHERE email = :email"
     data = {'email' : request.form['email']}
     return mysql.query_db(query,data)
@@ -79,12 +74,12 @@ def registration_form():
     if not request.form['password_conf'] == request.form['password']:
         flash(u'Password and Confirmation must match!','password_conf_error')
         errors = 1
-    if(login()):
+    if(show_by_email()):
         flash(u'Email already exists!','password_conf_error')
     if errors > 0:
         return redirect('/')
     add()
-    db = login()
+    db = show_by_email()
     session['active_id'] = db[0]['id']
     session['active_name'] = db[0]['first_name']
     return redirect('/wall')
@@ -103,7 +98,11 @@ def wall_page():
         print 'not in session'
         return redirect('/logoff')
     messages = get_messages()
-    comments = get_comments()
+    comments = {}
+    for message in messages:
+        print message['message_id']
+        comment = get_comment_by_message(message['message_id'])
+        comments[message['message_id']] = comment
     return render_template("wall.html", messages = messages, comments = comments)
 def get_messages():
     query = "SELECT messages.id AS message_id, first_name, last_name, message, messages.created_on, messages.users_id AS messages_users_id FROM messages LEFT JOIN users ON users.id = messages.users_id ORDER BY created_on DESC"
@@ -112,12 +111,13 @@ def get_message_by_id(message_id):
     query = "SELECT messages.created_on FROM messages WHERE id = :id"
     data = {'id' : message_id}
     return mysql.query_db(query,data)
-def get_comments():
-    query = "SELECT comments.id AS 	comment_id, comments.users_id AS comment_user_id, first_name, last_name, comment, comments.created_on, messages_users_id, messages_id  FROM comments   LEFT JOIN users   ON users.id = comments.users_id"
-    return mysql.query_db(query)
 def get_comment_by_id(comment_id):
     query = "SELECT comments.created_on FROM comments WHERE id = :id"
     data = {'id' : comment_id}
+    return mysql.query_db(query,data)
+def get_comment_by_message(messages_id):
+    query = "SELECT comments.id AS 	comment_id, comments.users_id AS comment_user_id, first_name, last_name, comment, comments.created_on, messages_users_id, messages_id  FROM comments   LEFT JOIN users   ON users.id = comments.users_id WHERE messages_id = :messages_id"
+    data = {'messages_id' : messages_id}
     return mysql.query_db(query,data)
 def can_delete(type,id,user_id):
     now = datetime.datetime.now()

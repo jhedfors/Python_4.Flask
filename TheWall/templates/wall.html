@@ -43,17 +43,15 @@
               <a href="/delete_message/{{message['message_id']}}/{{message['messages_users_id']}}">Delete</a>
               {% endif %}
               <div class="section container">
-              {% for comment in comments%}
-                {% if comment['messages_id'] == message['message_id']%}
-                  <p class=""><b>{{comment['first_name']}} {{comment['last_name']}} on {{comment['created_on']}} wrote:</b>
+              {% for comment in comments[message.message_id]%}
+                  <p class=""><b>{{comment.first_name}} {{comment.last_name}} on {{comment.created_on}} wrote:</b>
                   </p>
                   <p class="">
-                    {{comment['comment']}}
+                    {{comment.comment}}
                   </p>
-                  {% if session['active_id'] == comment['comment_user_id']%}
-                    <a href="/delete_comment/{{comment['comment_id']}}/{{comment['comment_user_id']}}">Delete</a>
+                  {% if session['active_id'] == comment.comment_user_id%}
+                    <a href="/delete_comment/{{comment.comment_id}}/{{comment.comment_user_id}}">Delete</a>
                   {% endif %}
-                {% endif %}
               {% endfor %}
               </div>
               <p class="post_label">Post a comment:</p>
